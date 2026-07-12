@@ -1,14 +1,16 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 
-export interface HttpOptions {
+export type HttpOptions = {
   baseURL?: string;
   timeout?: number;
-}
+  headers?: AxiosRequestConfig["headers"];
+};
 
 export const createHttp = (options?: HttpOptions) => {
   const instance = axios.create({
     baseURL: options?.baseURL || "http://127.0.0.1:32198",
-    timeout: options?.timeout
+    timeout: options?.timeout,
+    headers: options?.headers
   });
   return instance;
 };
